@@ -20,6 +20,7 @@ export default function App() {
 
   const { isFullscreen, toggleFullscreen } = useFullscreen();
   const [showRulesModal, setShowRulesModal] = useState(false);
+  const [showInfoModal, setShowInfoModal] = useState(false);
 
   // Keyboard shortcuts for accessibility & quick play
   useEffect(() => {
@@ -119,7 +120,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-stone-950 via-stone-900 to-stone-950 flex flex-col items-center p-3 sm:p-5 gap-4 sm:gap-6 overflow-x-hidden text-stone-100 font-sans">
       {/* Premium Header */}
-      <header className="w-full max-w-6xl flex items-center justify-between gap-4 py-2 border-b border-stone-800/80">
+      <header className="w-full max-w-6xl flex flex-wrap items-center justify-between gap-4 py-2 border-b border-stone-800/80">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500 via-yellow-400 to-amber-600 flex items-center justify-center shadow-xl shadow-amber-500/20 text-stone-950 text-2xl font-black">
             🎯
@@ -145,6 +146,13 @@ export default function App() {
             className="px-4 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 border border-stone-700/80 text-amber-300 hover:text-amber-200 font-black text-xs uppercase tracking-wider transition-all shadow active:scale-95 flex items-center gap-1.5"
           >
             <span>📖</span> <span className="hidden sm:inline">Règles</span>
+          </button>
+          <button
+            onClick={() => setShowInfoModal(true)}
+            title="Comment ce jeu a été fait"
+            className="px-4 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 border border-stone-700/80 text-amber-300 hover:text-amber-200 font-black text-xs uppercase tracking-wider transition-all shadow active:scale-95 flex items-center gap-1.5"
+          >
+            <span>ℹ️</span> <span className="hidden sm:inline">Infos</span>
           </button>
           <FullscreenButton />
         </div>
@@ -278,6 +286,37 @@ export default function App() {
               className="w-full py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-black tracking-wider uppercase transition-all shadow-xl mt-2 active:scale-95"
             >
               Compris, C&apos;est Parti ! 🚀
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Info Modal */}
+      {showInfoModal && (
+        <div className="fixed inset-0 z-50 bg-stone-950/80 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in" onClick={() => setShowInfoModal(false)}>
+          <div className="w-full max-w-lg rounded-3xl bg-gradient-to-b from-stone-900 to-stone-950 border-2 border-stone-700 p-6 sm:p-8 shadow-2xl flex flex-col gap-4 max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between border-b border-stone-800 pb-4">
+              <h2 className="text-2xl font-black text-amber-400">Comment ce jeu a été fait</h2>
+              <button
+                onClick={() => setShowInfoModal(false)}
+                className="w-10 h-10 rounded-2xl bg-stone-800 hover:bg-stone-700 font-black text-stone-200 text-lg flex items-center justify-center transition-all active:scale-95"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="space-y-3.5 text-sm text-stone-300 leading-relaxed">
+              <p><strong className="text-amber-300">Stack :</strong> React 19, TypeScript 5.9, Tailwind CSS 4, Vite 7, compilé en un seul fichier HTML, aucune dépendance chargée depuis l'extérieur.</p>
+              <p><strong className="text-amber-300">Graphismes :</strong> plateau et pions dessinés en Canvas 2D à chaque image, ligne de visée rebondissante calculée en direct, traînées et particules à l'empochage.</p>
+              <p><strong className="text-amber-300">Musique &amp; sons :</strong> synthétisés en direct avec l'API Web Audio, aucun fichier audio chargé.</p>
+              <p><strong className="text-amber-300">Interactions :</strong> glisser-relâcher souris ou tactile pour viser et tirer, clavier en alternative (flèches pour l'angle et la puissance, espace pour tirer).</p>
+              <p><strong className="text-amber-300">Architecture :</strong> logique de jeu dans un hook dédié (<code>useCarromGame</code>), physique et détection de collisions dans des modules purs séparés du rendu.</p>
+              <p><strong className="text-amber-300">Algorithmes notables :</strong> friction exponentielle sur chaque pion, collisions cercle-cercle avec impulsion pondérée par la masse de chaque pion (le palet de tir est plus lourd que les pièces), bouton Conseil qui simule plusieurs trajectoires possibles pour suggérer un coup jouable sur les pions du joueur actif.</p>
+            </div>
+            <button
+              onClick={() => setShowInfoModal(false)}
+              className="w-full py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-black tracking-wider uppercase transition-all shadow-xl mt-2 active:scale-95"
+            >
+              Fermer
             </button>
           </div>
         </div>
