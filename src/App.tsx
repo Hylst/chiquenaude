@@ -135,7 +135,7 @@ export default function App() {
               </span>
             </div>
             <p className="text-xs text-stone-400 font-medium tracking-wide">
-              Le Jeu de Billard Indien • Physique Améliorée v2.0
+              Le Jeu de Billard Indien • Physique de palets
             </p>
           </div>
         </div>
@@ -237,7 +237,7 @@ export default function App() {
               </div>
 
               <div className="bg-stone-900/80 rounded-2xl p-4 border border-stone-800">
-                <h3 className="font-black text-emerald-400 mb-1 text-base">💡 Nouveautés v2.0</h3>
+                <h3 className="font-black text-emerald-400 mb-1 text-base">💡 Nouveautés</h3>
                 <ul className="list-disc list-inside space-y-1 ml-2">
                   <li><strong>Mode Plein Écran</strong> immersif pour jouer en grand !</li>
                   <li><strong>Effets de particules</strong> spectaculaires lors de l&apos;empochage</li>
